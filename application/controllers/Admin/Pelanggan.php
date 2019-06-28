@@ -47,6 +47,7 @@ class Pelanggan extends CI_Controller {
 		}
 		else
 		{	
+			$_POST['pass_plg'] = md5($_POST['pass_plg']);
 			$id = $this->m_admin->tambah_data('pelanggan',$data_lain,true); // kalau true ambil id tabel nya
 			
 			unset($_POST);
@@ -59,7 +60,8 @@ class Pelanggan extends CI_Controller {
 			];
 
 			$this->m_admin->tambah_data('riwayat_saldo',$data_tambah);
-			$this->index();
+			// $this->index();
+			redirect('admin/pelanggan');         
 		}		
 	}
 

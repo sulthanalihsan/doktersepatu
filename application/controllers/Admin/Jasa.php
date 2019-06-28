@@ -29,18 +29,18 @@ class Jasa extends CI_Controller {
 	{
 		$this->login_kah();
 		$data['content']='admin/jasa/tambah';
-		$data['data_kategori'] = $this->m_admin->ambil_data('kategori');
+		$data['data_jasa'] = $this->m_admin->ambil_data('jasa');
 		
-		$foto = $this->cek_foto('foto_jasa');
+		$foto = $this->cek_foto('foto');
 
 		$data_lain=[
-			'foto_jasa' => $foto['foto_jasa'],
+			'foto' => $foto['foto'],
 		];
 
-		$this->form_validation->set_rules('id_kategori','Kategori','required');
-		$this->form_validation->set_rules('nama_jasa','Nama Jasa','required');
-		$this->form_validation->set_rules('tarif_jasa','Tarif','required');
-		$this->form_validation->set_rules('desk_jasa','Deskripsi','required');
+		$this->form_validation->set_rules('id_jasa','Jenis Jasa','required');
+		$this->form_validation->set_rules('nama_detail_jasa','Nama Detail Jasa','required');
+		$this->form_validation->set_rules('tarif','Tarif','required');
+		$this->form_validation->set_rules('deskripsi','Deskripsi','required');
 
 		if( $this->form_validation->run()==FALSE)
 		{	
@@ -49,7 +49,7 @@ class Jasa extends CI_Controller {
 		else
 		{	
 			// print_r($data['foto_jasa']);
-			$this->m_admin->tambah_data('jasa',$data_lain);
+			$this->m_admin->tambah_data('detail_jasa',$data_lain);
 			$this->index();
 		}		
 	}

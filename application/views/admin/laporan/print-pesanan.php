@@ -1,6 +1,6 @@
-<?php 
-$total=[];
-$bulan = array_keys($convert->bulan)[$_POST['filter_bulan']-1];
+<?php
+$total = [];
+$bulan = array_keys($convert->bulan)[$_POST['filter_bulan'] - 1];
 $tahun = $_POST['filter_tahun'];
 ?>
 
@@ -16,30 +16,30 @@ $tahun = $_POST['filter_tahun'];
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Laporan Pesanan Bulan <?= $bulan?> Dokter Sepatu</title>
+  <title>Laporan Pesanan Bulan <?=$bulan?> Dokter Sepatu</title>
 
-  <!-- <link href="<?php echo base_url();?>assets/css/AdminLTE.css" rel="stylesheet"> -->
+  <!-- <link href="<?php echo base_url(); ?>assets/css/AdminLTE.css" rel="stylesheet"> -->
 
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
 
   <!-- DATE TIME PICKER-->
-  <link href="<?php echo base_url();?>assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!-- Custom fonts for this template-->
-  <link href="<?= base_url();?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<?=base_url();?>assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="<?php echo base_url();?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?php echo base_url(); ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="<?php echo base_url();?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  
+  <link href="<?php echo base_url(); ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-  <script type="text/javascript" src="<?php echo base_url();?>assets/ckeditor/ckeditor.js"></script>
-  
+
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
+
     <!-- <script src="//cdn.ckeditor.com/4.11.4/full/ckeditor.js"></script> -->
   <style>
   .table-hover tr {
@@ -63,23 +63,23 @@ $tahun = $_POST['filter_tahun'];
           </tr>
         </thead>
         <tbody>
-          <?php $i=1; foreach($data_pesanan as $pesanan):?>
-          <tr class="pesanan" id="<?= $pesanan['id_pesanan'];?>">
-            <?php array_push($total,$pesanan['total']);?>
-            <td><?= $i;?></td>
+          <?php $i = 1;foreach ($data_pesanan as $pesanan): ?>
+          <tr class="pesanan" id="<?=$pesanan['id_pesanan'];?>">
+            <?php array_push($total, $pesanan['total']);?>
+            <td><?=$i;?></td>
             <td>
-            <?= returnDate($pesanan['waktu_pesan']);?>
+            <?=returnDate($pesanan['waktu_pesan']);?>
             </td>
-            <td><?= $pesanan['id_pesanan'];?></td>
-            <td><?= $data_plg[$pesanan['id_plg']-1]['nama_plg'];?></td>
-            <td><?= $this->format_uang->rupiah_aja($pesanan['total']);?></td>
+            <td><?=$pesanan['id_pesanan'];?></td>
+            <td><?=$data_plg[cariDataPlg($pesanan['id_plg'],$data_plg)]['nama_plg'];?></td>
+            <td><?=$this->format_uang->rupiah_aja($pesanan['total']);?></td>
           </tr>
-          <?php $i++; endforeach;?>
+          <?php $i++;endforeach;?>
           <tr class="bg-gray-300 text-center">
             <th colspan=4>Total Pemasukan Bulan <?=$bulan?></th>
-            <th colspan=1 class="text-left"><?= $this->format_uang->rupiah_aja(array_sum($total));?></th>
+            <th colspan=1 class="text-left"><?=$this->format_uang->rupiah_aja(array_sum($total));?></th>
           </tr>
-          <caption class="text-right">Jumlah Pesanan Bulan <?=$bulan." ".$tahun?> : <?= $i-1;?> Pesanan</caption>
+          <caption class="text-right">Jumlah Pesanan Bulan <?=$bulan . " " . $tahun?> : <?=$i - 1;?> Pesanan</caption>
         </tbody>
       </table>
 
@@ -93,48 +93,58 @@ function print_d(){
 </html>
 
 <?php
-function returnDate($tanggal){
-  $hari = new DateTime($tanggal);
-  $hari = $hari->format('D');
-  switch($hari){
-    case 'Sun':
-        $hari_ini = "Minggu";
-    break;
+function returnDate($tanggal)
+{
+    $hari = new DateTime($tanggal);
+    $hari = $hari->format('D');
+    switch ($hari) {
+        case 'Sun':
+            $hari_ini = "Minggu";
+            break;
 
-    case 'Mon':         
-        $hari_ini = "Senin";
-    break;
+        case 'Mon':
+            $hari_ini = "Senin";
+            break;
 
-    case 'Tue':
-        $hari_ini = "Selasa";
-    break;
+        case 'Tue':
+            $hari_ini = "Selasa";
+            break;
 
-    case 'Wed':
-        $hari_ini = "Rabu";
-    break;
+        case 'Wed':
+            $hari_ini = "Rabu";
+            break;
 
-    case 'Thu':
-        $hari_ini = "Kamis";
-    break;
+        case 'Thu':
+            $hari_ini = "Kamis";
+            break;
 
-    case 'Fri':
-        $hari_ini = "Jumat";
-    break;
+        case 'Fri':
+            $hari_ini = "Jumat";
+            break;
 
-    case 'Sat':
-        $hari_ini = "Sabtu";
-    break;
-    
-    default:
-        $hari_ini = "Tidak di ketahui";     
-    break;
+        case 'Sat':
+            $hari_ini = "Sabtu";
+            break;
+
+        default:
+            $hari_ini = "Tidak di ketahui";
+            break;
+    }
+
+    $date = new DateTime($tanggal);
+    echo $hari_ini . ", " . $date->format('d-m-Y');
+
 }
 
-  $date = new DateTime($tanggal);
-  echo $hari_ini.", ".$date->format('d-m-Y');
-
+function cariDataPlg($id_plg, $data_plg)
+{
+    $index;
+    for ($i = 0; $i < sizeof($data_plg); $i++) {
+        if ($id_plg == $data_plg[$i]["id_plg"]) {
+            $index = $i;
+        }
+    }
+    return $index;
 }
-
-
 // echo date()
 ?>

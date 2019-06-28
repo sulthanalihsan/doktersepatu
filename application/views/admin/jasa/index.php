@@ -39,7 +39,14 @@
           </tfoot>
           <tbody>
           <?php foreach ($data_detail_jasa as $detail_jasa): ?>
-            
+            <tr>
+              <td><?= $detail_jasa['id_detail_jasa']?></td>
+              <td><?= $data_jasa[ambilIndexData($detail_jasa['id_jasa'],$data_jasa)]['nama_jasa']?></td>
+              <td><?= $detail_jasa['nama_detail_jasa']?></td>
+              <td><?= $this->format_uang->rupiah_aja($detail_jasa['tarif']);?></td>
+              <td><?= $detail_jasa['deskripsi']?></td>
+              <!-- <td><?= $detail_jasa['nama_detail_jasa']?></td> -->
+            </tr>
             <?php endforeach; ?>
           </tbody>
         </table>
@@ -49,5 +56,18 @@
 </div>
 <!-- /.container-fluid -->
 
+<?php
+function ambilIndexData($id, $data)
+{
+    $index;
+    for ($i = 0; $i < sizeof($data); $i++) {
+        if ($id == $data[$i]["id_jasa"]) {
+            $index = $i;
+        }
+    }
+    return $index;
+}
+
+?>
 
 

@@ -466,7 +466,7 @@ $subtotal=0;
 
 function data_detail_jasa($id){
     $ci = get_instance();
-    $data = $ci->m_pelanggan->ambil_data_where('detail_jasa','id_detail_jasa',$id);
+    $data = $ci->m_pelanggan->ambil_data_where($id);
 
     // echo json_encode($data);
     return $data;

@@ -89,8 +89,8 @@ class M_api extends CI_model{
 
 	function cek_login($tabel)
 	{
-		$email=$this->input->post('email');
-		$password=md5($this->input->post('password'));
+		$email=$this->input->post('email_plg');
+		$password=md5($this->input->post('pass_plg'));
 
 		// echo $password;
 		$query=$this->db->get_where($tabel, array('email_plg'=>$email,'pass_plg'=>$password));

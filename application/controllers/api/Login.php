@@ -9,7 +9,7 @@ class Login extends REST_Controller{
 
 	function index_post(){
     
-        if(isset($_POST['email'],$_POST['password'])){ // mencek name data post
+        if(isset($_POST['email_plg'],$_POST['pass_plg'])){ // mencek name data post
             if($data_plg=$this->m_api->cek_login('pelanggan')){
 
                 $rwt_pesanan = count($this->m_api->ambil_data_where('pesanan','id_plg',$data_plg['id_plg']));
@@ -23,12 +23,14 @@ class Login extends REST_Controller{
             }else{
                 $this->response([
                     'status' => 0,
+                    'data_akun' => 0,
                     'message' => 'Login Gagal'
                 ], REST_Controller::HTTP_BAD_REQUEST);
             }
         }else{
             $this->response([
                 'status' => 2,
+                'data_akun' => 0,
                 'message' => 'Data Post Salah'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }

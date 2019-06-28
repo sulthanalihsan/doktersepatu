@@ -19,37 +19,37 @@
  <!-- <form action='#' > -->
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="id_kategori">Kategori</label>
-            <select name="id_kategori" id="id_kategori`" class="form-control">
+            <label for="id_jasa">Jenis Jasa</label>
+            <select name="id_jasa" id="id_jasa`" class="form-control">
                 <option value=0 selected>Pilih salah satu</option>
-                <?php foreach($data_kategori as $kategori):?>
-                <option value="<?= $kategori['id_kategori']?>"><?= $kategori['nama_kategori']?></option>
+                <?php foreach($data_jasa as $jasa):?>
+                <option value="<?= $jasa['id_jasa']?>"><?= $jasa['nama_jasa']?></option>
                 <?php endforeach; ?>
             </select>
         </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="nama_jasa">Nama Jasa</label>
-                <input type="text" name="nama_jasa" class="form-control" id="nama_jasa" placeholder="Masukan Nama Jasanya">
+                <label for="nama_detail_jasa">Nama Detail Jasa</label>
+                <input type="text" name="nama_detail_jasa" class="form-control" id="nama_detail_jasa" placeholder="Masukan Nama Jasanya">
             </div>    
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="tarif_jasa">tarif Jasa</label>
-                <input type="number" name="tarif_jasa" class="form-control" id="tarif_jasa" placeholder="Masukan Tarif">
+                <label for="tarif">tarif Jasa</label>
+                <input type="number" name="tarif" class="form-control" id="tarif" placeholder="Masukan Tarif">
             </div>    
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="desk_jasa">Deskripsi Jasa</label>
-                <input type="text" name="desk_jasa" class="form-control" id="desk_jasa" placeholder="Masukan Deskripsi Jasa">
+                <label for="deskripsi">Deskripsi Jasa</label>
+                <input type="text" name="deskripsi" class="form-control" id="deskripsi" placeholder="Masukan Deskripsi Jasa">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="foto_jasa">Foto Jasa</label>
-                    <input type="file" name="foto_jasa" class="form-control " id="foto_jasa">
+                <label for="foto">Foto Jasa</label>
+                    <input type="file" name="foto" class="form-control " id="foto">
             </div>
         </div>
         <button name='submit' type="submit" class="btn btn-primary">Simpan</button>

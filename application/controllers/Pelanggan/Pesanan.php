@@ -50,7 +50,6 @@ class Pesanan extends CI_Controller {
 			$data['pesanan_temp'] = $_SESSION['data_post'];
 		}
 		
-
 		$this->load->view('pelanggan/template',$data);
 	
 		

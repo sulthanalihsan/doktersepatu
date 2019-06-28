@@ -24,6 +24,8 @@ class Laporan extends CI_Controller {
 		$data_cari = 'pesanan.id_status = 3';
         
         if(!empty($_POST)){ //jika ada post
+            // echo json_encode($_POST);
+            // exit;
             $data_cari = "YEAR(waktu_pesan) = $_POST[filter_tahun] AND MONTH(waktu_pesan) = $_POST[filter_bulan] AND pesanan.id_status = 3";
             $data['data_pesanan']=$this->m_admin->data_pesanan_based_date($data_cari); //parameter : namatabel,primary,id
         }
@@ -43,10 +45,12 @@ class Laporan extends CI_Controller {
         if(!empty($_POST) && $_POST['filter_bulan'] != 'semua'){ //jika ada post
             $data_cari = "YEAR(waktu_deposit) = $_POST[filter_tahun] AND MONTH(waktu_deposit) = $_POST[filter_bulan] AND id_status = 4";
             $data['data_deposit']=$this->m_admin->ambil_data_wheres('deposit_saldo',$data_cari); //parameter : namatabel,primary,id
-            $data['card_header']="Data Pada Bulan ".$this->bulan($_POST['filter_bulan']);
+            $data['card_header']="Laporan Deposit Berhasil Pada Bulan ".$this->bulan($_POST['filter_bulan']);
         }else{
-            $data['card_header']="Data Semua Bulan";
-            $data['data_deposit']=$this->m_admin->ambil_data('deposit_saldo');
+            $data['card_header']="Laporan Deposit Berhasil Semua Bulan";
+            $data_cari = "id_status = 4";
+            $data['data_deposit']=$this->m_admin->ambil_data_wheres('deposit_saldo',$data_cari); //parameter : namatabel,primary,id
+            // $data['data_deposit']=$this->m_admin->ambil_data('deposit_saldo');
         }
 
         // $data['data_deposit']=$this->m_admin->ambil_data('deposit_saldo'); //parameter : namatabel,primary,id
