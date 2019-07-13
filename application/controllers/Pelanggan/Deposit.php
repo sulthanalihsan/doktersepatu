@@ -50,12 +50,15 @@ class Deposit extends CI_Controller
         $this->login_kah();
         $data['content'] = 'admin/deposit/tambah';
         $id_plg = $this->session->userdata('id_plg');
+
+        //meambil data berataan kode_unik
         $data_kode_unik = $this->m_pelanggan->ambil_data_kode_unik();
 
         a:
-        $kode_unik = rand(1, 999);
+        $kode_unik = rand(1, 999); //meacak kode unik hanyar
         $array_temp = [];
-        foreach ($data_kode_unik as $anu) {
+
+        foreach ($data_kode_unik as $anu) { //mencek ada kada kode unik yang sama
             $array_temp[] = $anu['total'];
         }
 
@@ -68,7 +71,7 @@ class Deposit extends CI_Controller
             $jml_deposit = $this->input->post('jml_deposit');
             $ttl_deposit = $jml_deposit + $kode_unik;
 
-            if (in_array($ttl_deposit, $array_temp)) {
+            if (in_array($ttl_deposit, $array_temp)) { // jika ada kode unik + jumlah yang sama
                 goto a;
             }
 

@@ -13,15 +13,80 @@ class Pesanan extends REST_Controller
     public function index_get()
     {
         $id_plg = $this->get('id_plg');
-        $id_deposit = $this->get('id_deposit');
+        $id_pesanan = $this->get('id_pesanan');
 
-        if ($id_deposit == null) {
+        $cari = [
+            "id_plg" => $id_plg,
+        ];
+
+        if ($id_pesanan == null) {
             //ambil semua data
-            $data_deposit = $this->m_api->ambil_data_where('deposit_saldo', 'id_plg', $id_plg);
-            if ($data_deposit != null) {
+            $data_pesanan = $this->m_api->ambil_data_where('pesanan', 'id_plg', $id_plg);
+
+            foreach ($data_pesanan as $key => $data_pesan) {
+                $total_tarif_pesanan = $this->m_api->total_tarif_pesanan($data_pesanan[$key]["id_pesanan"]);
+                $data_pesanan[$key]["total_tarif_pesanan"] = $total_tarif_pesanan[0]["total"];
+            }
+
+            if ($data_pesanan != null) {
                 $this->response([
                     'status' => 1,
-                    'data_deposit' => $data_deposit,
+                    'data_pesanan' => $data_pesanan,
+                    'message' => 'Data Ada',
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => 0,
+                    'message' => 'Data Tidak Ada',
+                ], REST_Controller::HTTP_NOT_FOUND);
+            }
+        } else {
+            //ambil detail data berdasarkan id_pesanan
+            $data_pesanan = $this->m_api->ambil_data_where('pesanan', 'id_pesanan', $id_pesanan);
+            foreach ($data_pesanan as $key => $data_pesan) {
+                $total_tarif_pesanan = $this->m_api->total_tarif_pesanan($data_pesanan[$key]["id_pesanan"]);
+                $data_pesanan[$key]["total_tarif_pesanan"] = $total_tarif_pesanan[0]["total"];
+            }
+
+            if ($data_pesanan != null) {
+                $this->response([
+                    'status' => 1,
+                    'data_pesanan' => $data_pesanan,
+                    'message' => 'Data Ada',
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => 0,
+                    'message' => 'Data Tidak Ada',
+                ], REST_Controller::HTTP_NOT_FOUND);
+            }
+        }
+    }
+
+    public function proses_get()
+    {
+        $id_plg = $this->get('id_plg');
+        $id_pesanan = $this->get('id_pesanan');
+
+        $cari = [
+            "id_plg" => $id_plg,
+            "id_status !=" => "3",
+        ];
+
+        if ($id_pesanan == null) {
+            //ambil semua data
+            $data_pesanan = $this->m_api->ambil_data_wheres('pesanan', $cari);
+            // $data_pesanan = $this->m_api->ambil_data_where('pesanan', 'id_plg', $id_plg);
+
+            foreach ($data_pesanan as $key => $data_pesan) {
+                $total_tarif_pesanan = $this->m_api->total_tarif_pesanan($data_pesanan[$key]["id_pesanan"]);
+                $data_pesanan[$key]["total_tarif_pesanan"] = $total_tarif_pesanan[0]["total"];
+            }
+
+            if ($data_pesanan != null) {
+                $this->response([
+                    'status' => 1,
+                    'data_pesanan' => $data_pesanan,
                     'message' => 'Data Ada',
                 ], REST_Controller::HTTP_OK);
             } else {
@@ -34,13 +99,79 @@ class Pesanan extends REST_Controller
             //ambil data detail
             $cari = [
                 "id_plg" => $id_plg,
-                "id_deposit" => $id_deposit,
+                "id_pesanan" => $id_pesanan,
+                "id_status !=" => "3",
             ];
-            $data_deposit = $this->m_api->ambil_data_wheres('deposit_saldo', $cari);
-            if ($data_deposit != null) {
+            $data_pesanan = $this->m_api->ambil_data_wheres('pesanan', $cari);
+            foreach ($data_pesanan as $key => $data_pesan) {
+                $total_tarif_pesanan = $this->m_api->total_tarif_pesanan($data_pesanan[$key]["id_pesanan"]);
+                $data_pesanan[$key]["total_tarif_pesanan"] = $total_tarif_pesanan[0]["total"];
+            }
+
+            if ($data_pesanan != null) {
                 $this->response([
                     'status' => 1,
-                    'data_deposit' => $data_deposit,
+                    'data_pesanan' => $data_pesanan,
+                    'message' => 'Data Ada',
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => 0,
+                    'message' => 'Data Tidak Ada',
+                ], REST_Controller::HTTP_NOT_FOUND);
+            }
+        }
+    }
+
+    public function selesai_get()
+    {
+        $id_plg = $this->get('id_plg');
+        $id_pesanan = $this->get('id_pesanan');
+
+        $cari = [
+            "id_plg" => $id_plg,
+            "id_status " => "3",
+        ];
+
+        if ($id_pesanan == null) {
+            //ambil semua data
+            $data_pesanan = $this->m_api->ambil_data_wheres('pesanan', $cari);
+            // $data_pesanan = $this->m_api->ambil_data_where('pesanan', 'id_plg', $id_plg);
+
+            foreach ($data_pesanan as $key => $data_pesan) {
+                $total_tarif_pesanan = $this->m_api->total_tarif_pesanan($data_pesanan[$key]["id_pesanan"]);
+                $data_pesanan[$key]["total_tarif_pesanan"] = $total_tarif_pesanan[0]["total"];
+            }
+
+            if ($data_pesanan != null) {
+                $this->response([
+                    'status' => 1,
+                    'data_pesanan' => $data_pesanan,
+                    'message' => 'Data Ada',
+                ], REST_Controller::HTTP_OK);
+            } else {
+                $this->response([
+                    'status' => 0,
+                    'message' => 'Data Tidak Ada',
+                ], REST_Controller::HTTP_NOT_FOUND);
+            }
+        } else {
+            //ambil data detail
+            $cari = [
+                "id_plg" => $id_plg,
+                "id_pesanan" => $id_pesanan,
+                "id_status " => "3",
+            ];
+            $data_pesanan = $this->m_api->ambil_data_wheres('pesanan', $cari);
+            foreach ($data_pesanan as $key => $data_pesan) {
+                $total_tarif_pesanan = $this->m_api->total_tarif_pesanan($data_pesanan[$key]["id_pesanan"]);
+                $data_pesanan[$key]["total_tarif_pesanan"] = $total_tarif_pesanan[0]["total"];
+            }
+
+            if ($data_pesanan != null) {
+                $this->response([
+                    'status' => 1,
+                    'data_pesanan' => $data_pesanan,
                     'message' => 'Data Ada',
                 ], REST_Controller::HTTP_OK);
             } else {

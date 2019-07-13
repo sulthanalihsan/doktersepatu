@@ -53,8 +53,8 @@ if (isset($pesanan_temp)) {
                                     <ul class="list-group">
 
                                 <?php
-$data_detail_jasa = data_detail_jasa($jasa_perawatan['id_jasa']);
-foreach ($data_detail_jasa as $detail_jasa): ?>
+                                    $data_detail_jasa = data_detail_jasa($jasa_perawatan['id_jasa']);
+                                    foreach ($data_detail_jasa as $detail_jasa): ?>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <h5 style="margin-bottom:0;"><?=$detail_jasa['nama_detail_jasa']?></h5>

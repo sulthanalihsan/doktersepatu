@@ -98,6 +98,7 @@ $subtotal=0;
                         <tbody>
                             <?php 
                             $i=1; $subtotal=0; $total=0; $id_jasa="";
+                            // echo json_encode($data_jumlah_jasa);
                             foreach ($data_jumlah_jasa as $jumlah_jasa):
                                 $id_jasa=$this->ambil_data->data_tb_lain($data_detail_jasa_tb,$jumlah_jasa['id_detail_jasa'],'id_jasa');
                             ?>
